@@ -5,13 +5,12 @@ import { google } from "googleapis";
 import nodemailer from "nodemailer";
 import readline from "readline";
 import { OAuth2Client } from "google-auth-library";
+// import pdf from 'pdf-parse'
+// import extractImages from 'pdf-image-extract'
 const SCOPES = [
   "https://www.googleapis.com/auth/gmail.readonly",
   "https://www.googleapis.com/auth/gmail.modify",
 ];
-
-// import pdf from 'pdf-parse'
-// import extractImages from 'pdf-image-extract'
 
 export const app = express();
 app.use(express.json());
@@ -25,7 +24,7 @@ app.get("/", (req, res) => {
 
 //   1. PDF Parsing
 //   - Write a program to parse PDFs attached to emails received on Gmail.n
-//   - The emails will have varying sender email addresses but will contain a specific subject line indicating that the attached PDF is a bank statement.
+//   - The emails will have varying sender email addresses but will contain a specific subject line indicating that   the attached PDF is a bank statement.
 //   - Extract text, images from PDFs.
 
 /*
@@ -173,7 +172,7 @@ async function extractImagesFromPDF(pdfData) {
 //  3 = Implement an API endpoint to search for transactions within a specific date range.
 //   - Implement an API endpoint to get the total balance as of a specific date.
 
-/* 1 =   i am considering that interaact mean get all data  , get data by specific id  , or post new data
+/* 1 =   i am considering that interact mean get all data  , get data by specific id  , or post new data
 so i implement this 3 apis 
 i consider that bank statement data is in json file which is in array  so i make demo data 
  */
@@ -292,49 +291,6 @@ function calculateBalance(bankStatementData, targetdate) {
 //    - Retrieve the PDF attachments from these emails for parsing.
 // As We Know that we already setup for Gmail Auth and get credintials and subject for get specific email
 
-
-/*
-1. Gmail API:
-
-The Gmail API is a Google API that allows developers to interact with Gmail, Google's email service, programmatically.
-It provides various methods for accessing Gmail features, including reading and sending emails.
-2. OAuth2 Authentication:
-
-OAuth2 is used for secure authorization. It allows your application to access Gmail data on behalf of a user without the user's credentials.
-In this program, you authenticate your application using OAuth2 with the Gmail API.
-The client_secret.json file contains the credentials for your application (client ID and client secret).
-3. Token Handling:
-
-The program loads and stores the OAuth2 token in a token.json file to avoid re-authentication for each run. This token allows your application to access Gmail on behalf of the user without asking for their credentials every time.
-4. createOAuthClient Function:
-
-Initializes the OAuth2 client using the credentials and loads the token if available.
-5. getNewToken Function:
-
-If the token is missing or invalid, it initiates the OAuth2 flow to obtain a new token. This includes generating an authorization URL for the user to grant access and exchanging the code for a token.
-6. Listing Messages:
-
-The program uses the Gmail API to search for emails with a specified subject line (e.g., 'subject:YOUR_SUBJECT_LINE').
-7. listMessages Function:
-
-Lists messages that match the specified subject line using the Gmail API.
-If messages are found, it proceeds to fetch each message for further processing.
-8. getMessage Function:
-
-Retrieves the content of an individual email message using the Gmail API.
-It examines the message payload for attachments (PDF files) and saves them to the local file system.
-The attachments can be either base64-encoded data or referenced by attachment IDs, and the function handles both cases.
-The PDF attachments are saved in the current working directory with filenames derived from the email subject.
-9. Error Handling:
-
-The program includes minimal error handling, but in a production environment, you should implement more robust error handling and logging to ensure that your application behaves gracefully in various scenarios.
-10. Usage:
-
-Replace 'subject:YOUR_SUBJECT_LINE' with your desired subject line for email filtering.
-Run the program, and it will authenticate your application, fetch matching emails, and save any PDF attachments to your local directory.
-This program serves as a foundation for automating tasks involving email processing. You can build upon it to create more advanced workflows or integrate it into larger applications that involve email automation.
-
-*/
 async function createOAuthClient() {
   const credentials = require("./your-credentials.json");
   const { client_secret, client_id, redirect_uris } = credentials.installed;
